@@ -1,8 +1,10 @@
 import Maze from "@/models/maze";
-import Room from '@/models/room';
-import Passage from '@/models/passage';
+import Room from "@/models/room";
+import Passage from "@/models/passage";
+import Configuration from "@/models/configuration";
+import { Direction } from "@/enums/direction";
 
-export default class configureMazeService {
+export default class ConfigureMazeService {
 
     private fileContent: string = "";
 
@@ -10,65 +12,78 @@ export default class configureMazeService {
 
     private foundExit: boolean = false;
 
-    public uploadConfiguration(fileName: string) {
-        // https://stackoverflow.com/questions/30453409/reading-a-text-file-using-javascript
+    // public uploadConfiguration(fileName: string) {
+    //     // https://stackoverflow.com/questions/30453409/reading-a-text-file-using-javascript
 
+    //     // this.fileContent = result;
 
+    // }
 
-        // this.fileContent = result;
+    public validateConfiguration(configuration: Configuration): string[] {
+        const errors: string[] = [];
 
-    }
-
-    public validateConfiguration(): string[] {
-        let errors: string[] = [];
-        let maze: Maze | null = null;
-
-        try {
-            maze = JSON.parse(this.fileContent) as Maze;
-        } catch (error) {
-            errors.push(error.message);
+        if (configuration.rooms > 100 || configuration.rooms < 2) {
+            errors.push("Rooms must be between 2 and 100");
+        }
+        if (configuration.maxPassages > 4 || configuration.maxPassages < 1) {
+            errors.push("There should be between 1 and 4 passages");
         }
 
-        if (maze != null) {
-            // add validation
-            // create boolean called found exit
-
-            // loop through each rooms
-            maze.rooms.forEach(room => {
-                this.validateRoom(room);
-            });
-
-
-        } else {
-            errors.push("Maze does not exist, please try again");
-
-        }
-        if (errors.length === 0) {
-            this.maze = maze
-        }
         return errors;
     }
 
-    private validateRoom(room: Room) {
-        let passages: Passage[] = [];
+    // public generateMaze(configuration: Configuration) {
+    //     // initialise a list of rooms and passages
+    //     const rooms: Room[] = [];
+    //     const passages: Passage[] = [];
 
-        // passages.forEach(passages => {
-        //     if(room.north != null) {}
+    //     // loop through desired room qualtity
+    //     for (let i: number = configuration.rooms; i > 0; i--) {
+    //         const room: Room = new Room();
 
-        // });
+    //         // get a random number of passages to attached to this room
+    //         const passageNumber: number = this.getRandomNumber(configuration.maxPassages);
 
-        // foreach room, create an array of passages
-        // check n, e, s, w != null add to array
-        // check isExit and then set exit is true
-        // if both true throw error.
-        // then check is passage.length is > 1 && < 4 === okay
+    //         // begin to link passages to this room or create a new passage if none found
+    //         for (let i: number = passageNumber; i > 0; i--) {
+    //             let passage: Passage | undefined = passages.find(passage => passage.exit === null);
+    //             if (passage === undefined) {
+    //                 passage = new Passage();
+    //                 passages.push(new Passage());
 
-        // dECORATOR PATTERN
-        // loop through each items in each room
-        // check the name is not empty
-        // if treasure integer value is undefined cast as 'threat'
-        // check value is > 0
-        // create another array called typedItems add the above casted items to the array
-        // set typedItems to a new []
+    //             }
+
+    //             // get direction to attach passage to
+    //             const randomNumberDirection: number = this.getRandomNumber(4);
+    //             switch (randomNumberDirection) {
+    //                 case 1:
+    //                     room.north = passage;
+    //                 case 2:
+    //                     room.east = passage;
+    //                 case 3:
+    //                     room.south = passage;
+    //                 case 4:
+    //                     room.west = passage;
+    //             }
+
+    //             // check to see it the passage is an entrance of exit
+    //             if (passage.entrance !== null) {
+    //                 passage.entrance = room;
+    //             } else {
+    //                 passage.exit = room;
+    //             }
+    //         }
+    //         // randomly initialise the rooms
+    //         // threat and treasures
+    //     }
+
+    //     // find a random passage where the exit is null
+    //     // set the boolean isExit to true = defines the end of the game
+    // }
+
+    private getRandomNumber(max: number): number {
+        return Math.floor(Math.random() * Math.floor(max));
     }
+
+
 }
