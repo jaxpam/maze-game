@@ -1,14 +1,18 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
-  </div>
+    <section>
+        <h1>test</h1>
+        <maze-game/>
+    </section>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import Maze from "@/components/Maze.vue";
 
-@Component({})
-
+@Component({
+    components: {
+        "maze-game": Maze
+    }
+})
 export default class Game extends Vue {}
 </script>
