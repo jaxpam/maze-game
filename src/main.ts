@@ -6,6 +6,7 @@ import store from "./store/store";
 
 import Game from "./views/Game.vue";
 import NotFound from "./views/NotFound.vue";
+import WelcomeScreen from "./views/WelcomeScreen.vue";
 
 Vue.config.productionTip = false;
 
@@ -20,6 +21,11 @@ const routes: any = [
         path: "/game",
         name: "Game",
         component: Game
+    },
+    {
+        path: "/welcome",
+        name: "Welcome",
+        component: WelcomeScreen
     },
     {
         path: "/not_found",
