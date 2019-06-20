@@ -1,3 +1,3 @@
-export default class Item {
+export default abstract class Item {
     public name: string = "";
 }
