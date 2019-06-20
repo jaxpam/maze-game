@@ -1,0 +1,29 @@
+.icon {
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  &__svg {
+    max-width: 3rem;
+    width: 100%;
+    padding: 0 2rem;
+  }
+
+  &__heading {
+    max-width: 100px;
+    width: 100%;
+    text-align: left;
+  }
+}
