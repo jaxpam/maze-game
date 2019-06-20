@@ -1,0 +1,27 @@
+input {
+  width: 100%;
+  border: 0;
+  font-size: 1rem;
+  color: $font-blue;
+
+  &:hover {
+    outline: none;
+  }
+
+  &:active {
+    outline: none;
+  }
+
+  &:visited {
+    outline: none;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+label {
+  font-family: $body-font;
+  padding-right: 20px;
+}

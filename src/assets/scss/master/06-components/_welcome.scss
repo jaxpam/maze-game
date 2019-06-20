@@ -14,13 +14,42 @@
   }
 
   &__title {
-    max-width: 700px;
+    display: flex;
+    align-items: center;
+    font-family: $title-font;
+    flex: 2;
+    max-width: 43.75rem;
     width: 100%;
     text-align: center;
     text-transform: uppercase;
+    font-size: 2.8rem;
   }
 
   &__video {
     height: 100vh;
+  }
+
+  &__input-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+    max-width: 25rem;
+    width: 100%;
+    padding: 2.5rem;
+    padding-top: 0;
+  }
+
+  &__input {
+    display: flex;
+    border-radius: 3.125rem;
+    background: $default-white;
+    padding: 0.625rem 0.9375rem;
+    margin: 0.625rem 0;
+    color: $font-blue;
+    font-weight: 600;
+    -webkit-box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.75);
   }
 }
