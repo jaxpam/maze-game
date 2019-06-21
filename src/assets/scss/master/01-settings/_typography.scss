@@ -12,5 +12,11 @@ $body-font: "Open Sans", sans-serif;
 $title-font: "dk_jalebiregular";
 
 h1 {
-  color: $default-white;
+  font-family: $title-font;
+  font-size: 2rem;
+}
+
+p {
+  font-family: $body-font;
+  font-size: 1rem;
 }
