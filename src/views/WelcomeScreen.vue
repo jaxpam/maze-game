@@ -6,8 +6,10 @@
             </video>
         </section>
         <section class="welcome__content">
-            <div class="welcome__title">
-                <h1>Stop those pesky rabbits and birds from eating your veggies!</h1>
+            <div class="welcome__title-wrapper">
+                <h1
+                    class="welcome__title"
+                >Stop those pesky rabbits and birds from eating your veggies!</h1>
             </div>
             <div class="welcome__input-wrapper">
                 <div class="welcome__input">
@@ -21,7 +23,7 @@
             </div>
             <div>
                 <router-link to="/game">
-                    <button class="button button--fill">Enter Game</button>
+                    <button class="button button--white">Enter Game</button>
                 </router-link>
             </div>
         </section>

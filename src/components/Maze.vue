@@ -1,5 +1,6 @@
 <template>
     <section class="maze">
+        <maze-placeholder/>
         <div>
             <h1></h1>
             <button @click="makeMove(Direction.north)" v-if="currentRoom.north !== null">north</button>
@@ -32,8 +33,13 @@ import InteractionService from "@/services/interactionService";
 import { Direction } from "../enums/direction";
 import Threat from "../models/threat";
 import Treasure from "../models/treasure";
+import MazePlaceholder from "./MazePlaceholder.vue";
 
-@Component({})
+@Component({
+    components: {
+        "maze-placeholder": MazePlaceholder
+    }
+})
 export default class Maze extends Vue {
     private get currentRoom() {
         return gameModule.state.currentRoom;

@@ -18,8 +18,13 @@
   -moz-box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.75);
 
-  &--fill {
+  &--white {
     background-color: $default-white;
+  }
+
+  &--blue {
+    background-color: $default-blue;
+    color: $default-white;
   }
 
   &--outline {
