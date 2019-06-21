@@ -11,6 +11,7 @@ export default class GameState implements IGameState {
     public currentPlayer: Player | null = new Player();
     public initialMaze: Maze | null = null;
     public currentMaze: Maze | null = null;
+    public currentThreat: Threat | null = new Threat();
     public currentRoom: Room | null = {
         north: new Passage(),
         east: null,
@@ -28,6 +29,11 @@ export default class GameState implements IGameState {
                 isDefeatedBy: {
                     name: "carrot"
                 }
+            }
+        ],
+        actions: [
+            {
+                name: "carrot"
             }
         ]
     };

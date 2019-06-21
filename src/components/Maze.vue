@@ -1,6 +1,5 @@
 <template>
-    <section>
-        <h1>Test</h1>
+    <section class="maze">
         <div>
             <h1></h1>
             <button @click="makeMove(Direction.north)" v-if="currentRoom.north !== null">north</button>
@@ -10,7 +9,11 @@
         </div>
 
         <ul>
-            <li v-for="threat in currentRoomThreats" :key="threat.name">{{threat.name}}</li>
+            <li
+                @click="eliminateThreat(threat)"
+                v-for="threat in currentRoomThreats"
+                :key="threat.name"
+            >{{threat.name}}</li>
         </ul>
 
         <ul>
@@ -61,7 +64,8 @@ export default class Maze extends Vue {
     }
 
     private async eliminateThreat(threat: Threat): Promise<void> {
-        // await new  InteractionService()
+        console.log(threat);
+        await new InteractionService().eliminateThreatFromGame(threat);
     }
 }
 </script>

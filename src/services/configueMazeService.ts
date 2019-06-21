@@ -37,7 +37,7 @@ export default class ConfigureMazeService {
     //     const rooms: Room[] = [];
     //     const passages: Passage[] = [];
 
-    //     // loop through desired room qualtity
+    //     // loop through desired room quantity
     //     for (let i: number = configuration.rooms; i > 0; i--) {
     //         const room: Room = new Room();
 
@@ -73,7 +73,7 @@ export default class ConfigureMazeService {
     //                 passage.exit = room;
     //             }
     //         }
-    //         // randomly initialise the rooms
+    //         // rand only initialise the rooms
     //         // threat and treasures
     //     }
 

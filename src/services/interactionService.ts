@@ -72,6 +72,6 @@ export default class InteractionService {
     }
 
     public async eliminateThreatFromGame(threat: Threat): Promise<void> {
-        // await
+        await gameModule.commitEliminateCurrentThreat({ threat });
     }
 }

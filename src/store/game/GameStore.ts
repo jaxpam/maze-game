@@ -4,6 +4,7 @@ import GameState from "./GameState";
 import Maze from "@/models/maze";
 import Room from "@/models/room";
 import Treasure from '@/models/treasure';
+import Threat from '@/models/threat';
 
 const initialGameState: GameState = new GameState();
 
@@ -35,6 +36,13 @@ function commitSetPlayerWealth(state: GameState, payload: { wealth: number }) {
     }
 }
 
+function commitEliminateCurrentThreat(state: GameState, payload: { threat: Threat }) {
+    if (state.currentRoom !== null) {
+        const index = state.currentRoom.threats.findIndex(threat => threat.name = payload.threat.name)
+        state.currentRoom.threats.splice(index, 1);
+    }
+}
+
 // action
 async function setCurrentMaze(
     context: BareActionContext<GameState, IRootState>,
@@ -58,6 +66,16 @@ async function pickUpTreasure(
         let currentWealth = context.state.currentPlayer.playerWealth;
         gameModule.commitSetPlayerWealth({ wealth: payload.treasure.value + currentWealth });
         gameModule.commitRemoveTreasureFromCurrentRoom({ treasure: payload.treasure });
+    }
+}
+
+async function eliminateCurrentThreat(
+    context: BareActionContext<GameState, IRootState>,
+    payload: { threat: Threat }
+) {
+    if (context.state.currentThreat !== null) {
+        let removeThreat = context.state.currentThreat.isDefeatedBy.name;
+        gameModule.commitEliminateCurrentThreat({ threat: payload.threat })
     }
 }
 
@@ -87,11 +105,12 @@ const gameModule = {
     commitSetCurrentRoom: a.commit(commitCurrentRoom),
     commitRemoveTreasureFromCurrentRoom: a.commit(commitRemoveTreasureFromCurrentRoom),
     commitSetPlayerWealth: a.commit(commitSetPlayerWealth),
+    commitEliminateCurrentThreat: a.commit(commitEliminateCurrentThreat),
 
     // actions
     dispatchSetCurrentMaze: a.dispatch(setCurrentMaze),
     dispatchSetCurrentRoom: a.dispatch(setCurrentRoom),
-    dispatchPickUpTreasure: a.dispatch(pickUpTreasure),
+    dispatchPickUpTreasure: a.dispatch(pickUpTreasure)
 
 };
 

@@ -1,7 +1,7 @@
 <template>
     <div class="welcome__block">
         <section>
-            <video class="welcome__video" autoplay>
+            <video class="welcome__video" autoplay loop>
                 <source src="@/assets/video/main.mp4" type="video/mp4">
             </video>
         </section>
@@ -9,17 +9,21 @@
             <div class="welcome__title">
                 <h1>Stop those pesky rabbits and birds from eating your veggies!</h1>
             </div>
-            <div>
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name">
+            <div class="welcome__input-wrapper">
+                <div class="welcome__input">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name">
+                </div>
+                <div class="welcome__input">
+                    <label for="email">Email:</label>
+                    <input type="email" id="name" name="email">
+                </div>
             </div>
             <div>
-                <label for="email">Email:</label>
-                <input type="email" id="name" name="email">
+                <router-link to="/game">
+                    <button class="button button--fill">Enter Game</button>
+                </router-link>
             </div>
-            <router-link to="/game">
-                <button>Enter Game</button>
-            </router-link>
         </section>
     </div>
 </template>

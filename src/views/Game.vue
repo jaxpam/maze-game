@@ -1,7 +1,9 @@
 <template>
-    <section>
-        <div>
+    <section class="game">
+        <div class="game__modal">
             <game-modal/>
+        </div>
+        <div class="game__maze">
             <maze-game/>
         </div>
     </section>
