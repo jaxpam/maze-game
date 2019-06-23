@@ -1,6 +1,5 @@
 <template>
     <section class="maze">
-        <maze-placeholder/>
         <div>
             <h1></h1>
             <button @click="makeMove(Direction.north)" v-if="currentRoom.north !== null">north</button>
@@ -11,7 +10,7 @@
 
         <ul>
             <li
-                @click="eliminateThreat(threat)"
+                @click="setCurrentThreat(threat)"
                 v-for="threat in currentRoomThreats"
                 :key="threat.name"
             >{{threat.name}}</li>
@@ -67,11 +66,24 @@ export default class Maze extends Vue {
 
     private async pickUpTreasure(treasure: Treasure): Promise<void> {
         await new InteractionService().addTreasureToPlayerWealth(treasure);
+        await gameModule.dispatchUpdateModal({
+            modal: {
+                imageFile: treasure.itemImage,
+                title: `You picked up a ${treasure.name}`,
+                body: treasure.description
+            }
+        });
     }
 
-    private async eliminateThreat(threat: Threat): Promise<void> {
-        console.log(threat);
-        await new InteractionService().eliminateThreatFromGame(threat);
+    private async setCurrentThreat(threat: Threat): Promise<void> {
+        gameModule.dispatchSetCurrentThreat({ threat });
+        await gameModule.dispatchUpdateModal({
+            modal: {
+                imageFile: threat.itemImage,
+                title: `You bumped into a ${threat.name}`,
+                body: threat.description
+            }
+        });
     }
 }
 </script>

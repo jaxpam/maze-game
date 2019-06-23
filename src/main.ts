@@ -4,9 +4,15 @@ import App from "./App.vue";
 import store from "./store/store";
 // import "./registerServiceWorker";
 
-import Game from "./views/Game.vue";
 import NotFound from "./views/NotFound.vue";
-import WelcomeScreen from "./views/WelcomeScreen.vue";
+import Maze from "./components/Maze.vue";
+import GameModal from "./components/GameModal.vue";
+import VideoSplash from "./components/VideoSplash.vue";
+import WelcomeScreen from "./components/WelcomeScreen.vue";
+import MazePlaceholder from "./components/MazePlaceholder.vue";
+import GamePlayModal from "./components/GamePlayModal.vue";
+import GameComplete from "./components/GameComplete.vue";
+import CreditsModal from "./components/CreditsModal.vue";
 
 Vue.config.productionTip = false;
 
@@ -15,17 +21,31 @@ Vue.use(VueRouter);
 const routes: any = [
     {
         path: "/",
-        redirect: "game"
+        components: {
+            left: VideoSplash,
+            right: WelcomeScreen
+        }
+    },
+    {
+        path: "/start",
+        components: {
+            left: GameModal,
+            right: MazePlaceholder
+        }
     },
     {
         path: "/game",
-        name: "Game",
-        component: Game
+        components: {
+            left: GamePlayModal,
+            right: Maze,
+        }
     },
     {
-        path: "/welcome",
-        name: "Welcome",
-        component: WelcomeScreen
+        path: "/finish",
+        components: {
+            left: CreditsModal,
+            right: GameComplete
+        }
     },
     {
         path: "/not_found",
