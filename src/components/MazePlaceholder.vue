@@ -1,11 +1,9 @@
 <template>
-    <section class="maze__placeholder">
+    <div class="maze__placeholder">
         <div class="maze__image">
-            <router-link to="/game">
-                <button class="button button--blue">Enter Game</button>
-            </router-link>
+            <router-link to="/game" class="button button--blue">Start Game</router-link>
         </div>
-    </section>
+    </div>
 </template>
 
 <script lang="ts">

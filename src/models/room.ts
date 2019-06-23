@@ -9,7 +9,6 @@ export default class Room {
     // DOC: due to limitations in TypeScript, we can't have mixed arrays.
     public treasures: Treasure[] = [];
     public threats: Threat[] = [];
-    public actions: Action[] = [];
     public north: Passage | null = null;
     public east: Passage | null = null;
     public south: Passage | null = null;

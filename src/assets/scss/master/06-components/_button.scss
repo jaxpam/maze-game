@@ -28,7 +28,8 @@
   }
 
   &--outline {
-    border-color: $default-blue;
+    border: 0.125rem solid $default-white;
+    color: $default-white;
   }
 
   &__wrapper {

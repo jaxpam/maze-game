@@ -3,8 +3,10 @@ import { getStoreBuilder, BareActionContext } from "vuex-typex";
 import GameState from "./GameState";
 import Maze from "@/models/maze";
 import Room from "@/models/room";
-import Treasure from '@/models/treasure';
-import Threat from '@/models/threat';
+import Treasure from "@/models/treasure";
+import Threat from "@/models/threat";
+import Action from "@/models/action";
+import Modal from "@/models/modal";
 
 const initialGameState: GameState = new GameState();
 
@@ -43,6 +45,15 @@ function commitEliminateCurrentThreat(state: GameState, payload: { threat: Threa
     }
 }
 
+function commitSetCurrentThreat(state: GameState, payload: { threat: Threat | null }) {
+    state.currentThreat = payload.threat;
+}
+
+function commitUpdateModal(state: GameState, payload: { modal: Modal | null }) {
+    state.currentModal = payload.modal
+}
+
+
 // action
 async function setCurrentMaze(
     context: BareActionContext<GameState, IRootState>,
@@ -63,7 +74,7 @@ async function pickUpTreasure(
     payload: { treasure: Treasure }
 ) {
     if (context.state.currentPlayer !== null) {
-        let currentWealth = context.state.currentPlayer.playerWealth;
+        let currentWealth: number = context.state.currentPlayer.playerWealth;
         gameModule.commitSetPlayerWealth({ wealth: payload.treasure.value + currentWealth });
         gameModule.commitRemoveTreasureFromCurrentRoom({ treasure: payload.treasure });
     }
@@ -71,12 +82,37 @@ async function pickUpTreasure(
 
 async function eliminateCurrentThreat(
     context: BareActionContext<GameState, IRootState>,
+    payload: { action: Action }
+): Promise<boolean> {
+    if (context.state.currentThreat !== null) {
+        let removeThreat: boolean = context.state.currentThreat.isDefeatedBy.name === payload.action.name;
+        if (removeThreat) {
+            gameModule.commitEliminateCurrentThreat({ threat: context.state.currentThreat });
+            gameModule.commitSetCurrentThreat({ threat: null });
+
+            return true;
+        } else {
+
+            return false;
+        }
+    } else {
+
+        return false;
+    }
+}
+
+async function updateModal(
+    context: BareActionContext<GameState, IRootState>,
+    payload: { modal: Modal | null }
+) {
+    gameModule.commitUpdateModal({ modal: payload.modal });
+}
+
+async function setCurrentThreat(
+    context: BareActionContext<GameState, IRootState>,
     payload: { threat: Threat }
 ) {
-    if (context.state.currentThreat !== null) {
-        let removeThreat = context.state.currentThreat.isDefeatedBy.name;
-        gameModule.commitEliminateCurrentThreat({ threat: payload.threat })
-    }
+    gameModule.commitSetCurrentThreat({ threat: payload.threat });
 }
 
 // getters
@@ -106,11 +142,16 @@ const gameModule = {
     commitRemoveTreasureFromCurrentRoom: a.commit(commitRemoveTreasureFromCurrentRoom),
     commitSetPlayerWealth: a.commit(commitSetPlayerWealth),
     commitEliminateCurrentThreat: a.commit(commitEliminateCurrentThreat),
+    commitSetCurrentThreat: a.commit(commitSetCurrentThreat),
+    commitUpdateModal: a.commit(commitUpdateModal),
 
     // actions
     dispatchSetCurrentMaze: a.dispatch(setCurrentMaze),
     dispatchSetCurrentRoom: a.dispatch(setCurrentRoom),
-    dispatchPickUpTreasure: a.dispatch(pickUpTreasure)
+    dispatchPickUpTreasure: a.dispatch(pickUpTreasure),
+    dispatchEliminateThreat: a.dispatch(eliminateCurrentThreat),
+    dispatchSetCurrentThreat: a.dispatch(setCurrentThreat),
+    dispatchUpdateModal: a.dispatch(updateModal)
 
 };
 

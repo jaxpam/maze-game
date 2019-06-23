@@ -1,0 +1,13 @@
+.app {
+  &__information {
+    background-image: url("./assets/img/background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 0 3.125rem;
+    width: 40%;
+  }
+
+  &__game {
+    width: 60%;
+  }
+}

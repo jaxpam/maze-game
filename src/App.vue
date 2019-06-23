@@ -1,7 +1,8 @@
 <template>
     <div id="app">
         <main>
-            <router-view/>
+            <router-view tag="section" class="app__information" name="left"></router-view>
+            <router-view tag="section" class="app__game" name="right"></router-view>
         </main>
     </div>
 </template>

@@ -71,7 +71,4 @@ export default class InteractionService {
         await gameModule.dispatchPickUpTreasure({ treasure });
     }
 
-    public async eliminateThreatFromGame(threat: Threat): Promise<void> {
-        await gameModule.commitEliminateCurrentThreat({ threat });
-    }
 }
