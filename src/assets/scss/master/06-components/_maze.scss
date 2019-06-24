@@ -1,4 +1,6 @@
 .maze {
+  height: 100%;
+
   &__image {
     display: flex;
     justify-content: center;
@@ -6,5 +8,19 @@
     background-image: url("./assets/img/maze-background.jpg");
     background-size: cover;
     height: 100%;
+  }
+
+  &__arrow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &--row {
+      flex-direction: row;
+    }
+
+    &--column {
+      flex-direction: column;
+    }
   }
 }
