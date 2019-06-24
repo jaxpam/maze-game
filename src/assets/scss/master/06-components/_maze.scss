@@ -10,17 +10,21 @@
     height: 100%;
   }
 
-  &__arrow {
+  &__button-wrapper {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    padding: 200px 0;
+  }
 
-    &--row {
-      flex-direction: row;
-    }
+  &__icon-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
 
-    &--column {
-      flex-direction: column;
-    }
+  &__icon-wrapper {
+    display: flex;
+    justify-content: center;
   }
 }

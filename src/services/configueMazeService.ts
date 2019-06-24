@@ -9,6 +9,8 @@ import Treasure from '@/models/treasure';
 
 export default class ConfigureMazeService {
 
+    private imageUrl: string = "http://localhost:8080/";
+
     private readonly availableThreats: Threat[] = [{
         name: "rabbit",
         isDefeatedBy: {
@@ -28,12 +30,12 @@ export default class ConfigureMazeService {
         description: ""
     },
     {
-        name: "slug",
+        name: "snail",
         isDefeatedBy: {
-            name: "seed",
-            image: "./svg/pellet.svg"
+            name: "salt",
+            image: "./svg/salt.svg"
         },
-        image: "./svg/slug.svg",
+        image: "./svg/snail.svg",
         description: ""
     }
     ];
@@ -43,20 +45,20 @@ export default class ConfigureMazeService {
         {
             name: "raspberry",
             value: 100,
-            image: "./svg/raspberry.svg",
+            image: "",
             description: "Rich in vitamins, antioxidants, and fiber, raspberries are delicious fruits with many health benefits. There are an array of things you could make with raspberries, some of those include: Jam, Cheesecake or add them to your breakfast for sweetness"
         },
         {
             name: "broccoli",
             value: 50,
-            image: "./svg/broccoli.svg",
-            description: "Green and high in iron."
+            image: "",
+            description: "It is an excellent source of vitamin K, vitamin C, chromium and folate. Broccoli is a very good source of dietary fiber, pantothenic acid, vitamin B6, vitamin E, manganese, phosphorus, choline, vitamin B1, vitamin A (in the form of carotenoids), potassium and copper. Broccoli is also a good source of vitamin B1, magnesium, omega-3 fatty acids, protein, zinc, calcium, iron, niacin and selenium."
         },
         {
             name: "tomato",
             value: 25,
-            image: "./svg/tomoto.svg",
-            description: "Red and glistening in the sun."
+            image: "",
+            description: "Tomatoes are rich in lycopene, an antioxidant that is good for the heart and effective against certain cancers. Cooked tomatoes are actually better for you than raw ones, as more beneficial chemicals are released. Tomatoes are also packed with vitamins A and C, calcium, potassium."
         }
     ];
 

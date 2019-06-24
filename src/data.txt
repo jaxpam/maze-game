@@ -1,0 +1,80 @@
+{
+  "timeout": 60000,
+  "items": [
+	"actions": [
+	{
+		"Name": "Carrot" ,
+		"Image": "carrot.svg"
+	},
+	{
+		"Name": "Seed" ,
+		"Image": "seed.svg"
+	},
+	{
+		"Name": "Salt" ,
+		"Image": "salt.svg"
+	}
+	]
+	"treasures":[
+		{
+		  "Name": "Raspberry" ,
+		  "Value": 100,
+		  "Image": "raspberry.svg",
+		  "Modal": {
+			   "Image": "raspberry.svg",
+               "Body": "Rich in vitamins, antioxidants, and fiber, raspberries are delicious fruits with many health benefits.There are an array of things you could make with raspberries, some of those include: Jam, Cheesecake or add them to your breakfast for sweetness."
+		  }
+		},
+		{
+		  "Name": "Broccoli" ,
+		  "Value": 50,
+		  "Image": "broccoli.svg",
+		  "Modal": {
+			   "Image": "broccoli.svg",
+               "Body": "It is an excellent source of vitamin K, vitamin C, chromium and folate. Broccoli is a very good source of dietary fiber, pantothenic acid, vitamin B6, vitamin E, manganese, phosphorus, choline, vitamin B1, vitamin A (in the form of carotenoids), potassium and copper. Broccoli is also a good source of vitamin B1, magnesium, omega-3 fatty acids, protein, zinc, calcium, iron, niacin and selenium."
+		  }
+		},
+		{
+		  "Name": "Tomato" ,
+		  "Value": 50,
+		  "Image": "tomato.svg",
+		  "Modal": {
+			   "Image": "tomato.svg",
+               "Body": "Tomatoes are rich in lycopene, an antioxidant that is good for the heart and effective against certain cancers. Cooked tomatoes are actually better for you than raw ones, as more beneficial chemicals are released. Tomatoes are also packed with vitamins A and C, calcium, potassium."
+		  }
+		}
+	],
+	"threats": [
+		{
+		  "Name": "Rabbit" ,
+		  "Value": 100,
+		  "Image": "rabbit.svg",
+		  "isDefeatedBy": "Carrot",
+		  "Modal": {
+			   "Image": "rabbit.svg",
+               "Body": "Feed the Rabbit and it'll run away!"
+		  }
+		},
+		{
+		  "Name": "Crow" ,
+		  "Value": 200,
+		  "Image": "crow.svg"
+		  "isDefeatedBy": "Seed",
+		  "Modal": {
+			   "Image": "crow.svg",
+               "Body": "Feed the Crow and it'll fly away!"
+		  }
+		},
+		{
+		  "Name": "Snail" ,
+		  "Value": 50,
+		  "Image": "snail.svg"
+		  "isDefeatedBy": "Salt",
+		  "Modal": {
+			   "Image": "salt.svg",
+               "Body": "Put some salt around you crops and the Snail will go away!"
+		  }
+		}
+	]
+  ]
+}

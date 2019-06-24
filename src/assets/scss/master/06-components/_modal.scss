@@ -15,6 +15,7 @@
 
   &__content {
     color: $default-white;
+    padding: 0 20px;
 
     &--blue {
       color: $default-blue;
@@ -23,6 +24,7 @@
 
   &__heading {
     color: $default-white;
+    padding: 0 20px;
 
     &--sub-header {
       font-family: $title-font;

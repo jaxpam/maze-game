@@ -2,7 +2,7 @@
     <div>
         <div class="modal__wrapper">
             <div class="modal__game-play" v-if="showModal">
-                <img :src="`@/assets/svg/${ modal.image }`">
+                <img class="icon__svg--large" :src="`${ modal.image }`">
                 <h1 class="modal__heading">{{ modal.title }}</h1>
                 <p class="modal__content">{{ modal.body}}</p>
                 <button
@@ -72,19 +72,27 @@ export default class GamePlayModal extends Vue {
             await gameModule.dispatchSetCurrentThreat({ threat: null });
             await gameModule.dispatchUpdateModal({
                 modal: {
-                    image: "rabbit.svg",
-                    title: "The Rabbit ate the carrot!",
+                    image: "",
+                    title: "You defeated the threat!",
                     body:
-                        "You're in luck! The Rabbit didn't touch your strawberry beds, instead it enjoyed the carrot and ran away."
+                        "You're in luck! The pesky pest didn't touch your strawberry beds, instead it left the allotment."
+                }
+            });
+        } else if (threatResult) {
+            await gameModule.dispatchUpdateModal({
+                modal: {
+                    image: "",
+                    title: "Oh dear, that's not quite right!",
+                    body:
+                        "Try another threat eliminator to shoo the threat away"
                 }
             });
         } else {
             await gameModule.dispatchUpdateModal({
                 modal: {
-                    image: "carrot.svg",
+                    image: "",
                     title: "Oh dear, that's not quite right!",
-                    body:
-                        "These Rabbits seem to prefer tasty fresh carrots, not seeds. Try feeding the rabbit a carrot and see what happens."
+                    body: ""
                 }
             });
         }

@@ -61,7 +61,7 @@
                 </li>
                 <li class="icon__container">
                     <img class="icon__svg" src="@/assets/svg/salt.svg">
-                    <p class="icon__subheading">Seed</p>
+                    <p class="icon__subheading">Salt</p>
                 </li>
             </ul>
         </div>

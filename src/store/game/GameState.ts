@@ -22,34 +22,15 @@ export default class GameState implements IGameState {
         {
             name: "seed",
             image: "./svg/seed.svg"
+        },
+        {
+            name: "salt",
+            image: "./svg/salt.svg"
         }
     ];
     public currentRoom: Room | null = new Room();
     currentModal: Modal | null = null;
 }
 
-// {
-//     north: new Passage(),
-//     east: null,
-//     south: null,
-//     west: null,
-//     treasures: [
-//         {
-//             name: "raspberry",
-//             value: 100,
-//             image: "./svg/raspberry.svg",
-//             description: "Rich in vitamins, antioxidants, and fiber, raspberries are delicious fruits with many health benefits. There are an array of things you could make with raspberries, some of those include: Jam, Cheesecake or add them to your breakfast for sweetness"
-//         }
-//     ],
-//     threats: [
-//         {
-//             name: "rabbit",
-//             isDefeatedBy: {
-//                 name: "carrot",
-//                 image: "./svg/carrot.svg"
-//             },
-//             image: "./svg/rabbit.svg",
-//             description: ""
-//         }
-//     ],
-// };
+
+

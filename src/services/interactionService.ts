@@ -10,6 +10,7 @@ export default class InteractionService {
 
     public makeMove(direction: Direction): boolean {
         let canMove: boolean = false;
+
         // due to room structure, we must store passage later.
         let passage: Passage = new Passage();
 
@@ -55,14 +56,20 @@ export default class InteractionService {
             if (canMove) {
                 console.log("moves ", passage.entrance, passage.exit);
                 // to try and stop the user from getting stuck in a room, try and find the right end of the passage.
-                if (passage.exit === currentRoom && passage.entrance !== null) {
+                if (passage.isExit) {
+                    return true;
+                } else if (passage.exit === currentRoom && passage.entrance !== null) {
                     gameModule.dispatchSetCurrentRoom({ room: passage.entrance });
 
                 } else if (passage.exit !== null) {
                     gameModule.dispatchSetCurrentRoom({ room: passage.exit });
                 }
             }
+
+
         }
+
+
         console.log("finally ", canMove);
         return canMove;
     }

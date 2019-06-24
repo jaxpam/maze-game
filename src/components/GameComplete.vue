@@ -4,11 +4,11 @@
         <h1 class="complete__heading">Congratulations</h1>
         <p class="complete__content">
             You managed to save your allotment
-            from the rabbits and crows.
+            from those pesky pests.
         </p>
         <div class="button__wrapper button__wrapper--row">
             <router-link to="/start" class="button button--white">Play Again</router-link>
-            <button class="button button--white button--red-font">Exit Maze Game</button>
+            <router-link to="/" class="button button--white button--red-font">Exit Maze Game</router-link>
         </div>
     </div>
 </template>

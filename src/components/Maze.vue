@@ -1,6 +1,6 @@
 <template>
     <div class="maze">
-        <div class="maze__arrow maze__arrow--column">
+        <div class="maze__button-wrapper">
             <button
                 class="button button--white"
                 @click="makeMove(1)"
@@ -11,8 +11,6 @@
                 @click="makeMove(3)"
                 v-if="currentRoom.south !== null"
             >south</button>
-        </div>
-        <div class="maze__arrow maze__arrow--row">
             <button
                 class="button button--white"
                 @click="makeMove(2)"
@@ -24,25 +22,27 @@
                 v-if="currentRoom.west !== null"
             >west</button>
         </div>
-        <ul>
-            <li
-                @click="setCurrentThreat(threat)"
-                v-for="threat in currentRoomThreats"
-                :key="threat.image"
-            >
-                <img :src="threat.image" class="icon__svg">
-            </li>
-        </ul>
+        <div class="maze__icon-container">
+            <ul class="maze__icon-wrapper">
+                <li
+                    @click="setCurrentThreat(threat)"
+                    v-for="threat in currentRoomThreats"
+                    :key="threat.image"
+                >
+                    <img :src="threat.image" class="icon__svg">
+                </li>
+            </ul>
 
-        <ul>
-            <li
-                @click="pickUpTreasure(treasure)"
-                v-for="treasure in currentRoomTreasures"
-                :key="treasure.image"
-            >
-                <img :src="treasure.image" class="icon__svg">
-            </li>
-        </ul>
+            <ul class="maze__icon-wrapper">
+                <li
+                    @click="pickUpTreasure(treasure)"
+                    v-for="treasure in currentRoomTreasures"
+                    :key="treasure.image"
+                >
+                    <img :src="treasure.image" class="icon__svg">
+                </li>
+            </ul>
+        </div>
     </div>
 </template>
 <script lang="ts">
@@ -65,7 +65,9 @@ export default class Maze extends Vue {
     }
 
     private makeMove(direction: Direction) {
-        new InteractionService().makeMove(direction);
+        if (new InteractionService().makeMove(direction)) {
+            this.$router.push("/finish");
+        }
     }
 
     private get currentRoomThreats(): Threat[] {
@@ -94,15 +96,45 @@ export default class Maze extends Vue {
                 body: treasure.description
             }
         });
+        await gameModule.dispatchUpdateModal({
+            modal: {
+                image: "broccoli.svg",
+                title: `You picked up a ${treasure.name}`,
+                body: treasure.description
+            }
+        });
+        await gameModule.dispatchUpdateModal({
+            modal: {
+                image: "tomato.svg",
+                title: `You picked up a ${treasure.name}`,
+                body: treasure.description
+            }
+        });
     }
 
     private async setCurrentThreat(threat: Threat): Promise<void> {
         gameModule.dispatchSetCurrentThreat({ threat });
         await gameModule.dispatchUpdateModal({
             modal: {
-                image: "rabbit.svg",
+                image: "./svg/rabbit.svg",
                 title: `You bumped into a ${threat.name}`,
-                body: "Feed the Rabbit and he'll run away!"
+                body: "Feed the Rabbit and it'll run away!"
+            }
+        });
+        gameModule.dispatchSetCurrentThreat({ threat });
+        await gameModule.dispatchUpdateModal({
+            modal: {
+                image: "./svg/crow.svg",
+                title: `You bumped into a ${threat.name}`,
+                body: "Feed the Crow and it'll fly away!"
+            }
+        });
+        gameModule.dispatchSetCurrentThreat({ threat });
+        await gameModule.dispatchUpdateModal({
+            modal: {
+                image: "./svg/snail.svg",
+                title: `You bumped into a ${threat.name}`,
+                body: "Feed the Snail and it'll go away!"
             }
         });
     }
