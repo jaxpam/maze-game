@@ -1,7 +1,6 @@
 <template>
-    <section class="maze">
-        <div>
-            <h1></h1>
+    <div class="maze">
+        <div class="maze__arrow maze__arrow--column">
             <button
                 class="button button--white"
                 @click="makeMove(1)"
@@ -9,21 +8,22 @@
             >north</button>
             <button
                 class="button button--white"
-                @click="makeMove(2)"
-                v-if="currentRoom.east !== null"
-            >east</button>
-            <button
-                class="button button--white"
                 @click="makeMove(3)"
                 v-if="currentRoom.south !== null"
             >south</button>
+        </div>
+        <div class="maze__arrow maze__arrow--row">
+            <button
+                class="button button--white"
+                @click="makeMove(2)"
+                v-if="currentRoom.east !== null"
+            >east</button>
             <button
                 class="button button--white"
                 @click="makeMove(4)"
                 v-if="currentRoom.west !== null"
             >west</button>
         </div>
-
         <ul>
             <li
                 @click="setCurrentThreat(threat)"
@@ -43,7 +43,7 @@
                 <img :src="treasure.image" class="icon__svg">
             </li>
         </ul>
-    </section>
+    </div>
 </template>
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
