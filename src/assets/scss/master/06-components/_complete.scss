@@ -1,0 +1,15 @@
+.complete {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: $default-blue;
+
+  &__heading {
+    color: $default-white;
+  }
+
+  &__content {
+    color: $default-white;
+  }
+}
