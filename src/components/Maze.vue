@@ -2,26 +2,46 @@
     <section class="maze">
         <div>
             <h1></h1>
-            <button @click="makeMove(Direction.north)" v-if="currentRoom.north !== null">north</button>
-            <button @click="makeMove(Direction.east)" v-if="currentRoom.east !== null">east</button>
-            <button @click="makeMove(Direction.south)" v-if="currentRoom.south !== null">south</button>
-            <button @click="makeMove(Direction.west)" v-if="currentRoom.west !== null">west</button>
+            <button
+                class="button button--white"
+                @click="makeMove(1)"
+                v-if="currentRoom.north !== null"
+            >north</button>
+            <button
+                class="button button--white"
+                @click="makeMove(2)"
+                v-if="currentRoom.east !== null"
+            >east</button>
+            <button
+                class="button button--white"
+                @click="makeMove(3)"
+                v-if="currentRoom.south !== null"
+            >south</button>
+            <button
+                class="button button--white"
+                @click="makeMove(4)"
+                v-if="currentRoom.west !== null"
+            >west</button>
         </div>
 
         <ul>
             <li
                 @click="setCurrentThreat(threat)"
                 v-for="threat in currentRoomThreats"
-                :key="threat.name"
-            >{{threat.name}}</li>
+                :key="threat.image"
+            >
+                <img :src="threat.image" class="icon__svg">
+            </li>
         </ul>
 
         <ul>
             <li
                 @click="pickUpTreasure(treasure)"
                 v-for="treasure in currentRoomTreasures"
-                :key="treasure.name"
-            >{{treasure.name}}</li>
+                :key="treasure.image"
+            >
+                <img :src="treasure.image" class="icon__svg">
+            </li>
         </ul>
     </section>
 </template>
@@ -66,9 +86,10 @@ export default class Maze extends Vue {
 
     private async pickUpTreasure(treasure: Treasure): Promise<void> {
         await new InteractionService().addTreasureToPlayerWealth(treasure);
+        await gameModule.dispatchSetCurrentThreat({ threat: null });
         await gameModule.dispatchUpdateModal({
             modal: {
-                imageFile: treasure.itemImage,
+                image: "raspberry.svg",
                 title: `You picked up a ${treasure.name}`,
                 body: treasure.description
             }
@@ -79,11 +100,27 @@ export default class Maze extends Vue {
         gameModule.dispatchSetCurrentThreat({ threat });
         await gameModule.dispatchUpdateModal({
             modal: {
-                imageFile: threat.itemImage,
+                image: "rabbit.svg",
                 title: `You bumped into a ${threat.name}`,
-                body: threat.description
+                body: "Feed the Rabbit and he'll run away!"
             }
         });
+    }
+
+    private async created() {
+        if (gameModule.state.currentMaze !== null) {
+            gameModule.dispatchSetCurrentRoom({
+                room:
+                    gameModule.state.currentMaze.rooms[
+                        Math.floor(
+                            Math.random() *
+                                Math.floor(
+                                    gameModule.state.currentMaze.rooms.length
+                                )
+                        )
+                    ]
+            });
+        }
     }
 }
 </script>

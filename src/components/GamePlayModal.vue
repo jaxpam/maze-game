@@ -2,23 +2,27 @@
     <div>
         <div class="modal__wrapper">
             <div class="modal__game-play" v-if="showModal">
-                <img :src="`@/assets/svg/${ modal.imageFile }`">
-                <h1>{{ modal.title }}</h1>
-                <p>{{ modal.body}}</p>
-                <button class="button button--outline" @click="closeModal">Continue Play</button>
+                <img :src="`@/assets/svg/${ modal.image }`">
+                <h1 class="modal__heading">{{ modal.title }}</h1>
+                <p class="modal__content">{{ modal.body}}</p>
+                <button
+                    v-show="currentThreat === null"
+                    class="button button--outline"
+                    @click="closeModal"
+                >Continue Play</button>
+                <div v-show="currentThreat !== null" class="icon__action-wrapper">
+                    <button
+                        @click="eliminateThreat(action)"
+                        v-for="action in actions"
+                        :key="action.image"
+                    >
+                        <img :src="action.image" class="icon__svg">
+                    </button>
+                </div>
             </div>
             <div class="modal__game-play" v-else>
                 <img class="icon__svg icon__svg--large" src="@/assets/svg/score.svg">
-                <h1>Score: {{ score }}</h1>
-            </div>
-            <div v-show="currentThreat !== null">
-                <button
-                    @click="eliminateThreat(action)"
-                    v-for="action in actions"
-                    :key="action.image"
-                >
-                    <img :src="action.image" class="icon__svg">
-                </button>
+                <h1 class="modal__heading">Score: {{ score }}</h1>
             </div>
         </div>
     </div>
@@ -64,6 +68,26 @@ export default class GamePlayModal extends Vue {
         const threatResult = await gameModule.dispatchEliminateThreat({
             action
         });
+        if (threatResult) {
+            await gameModule.dispatchSetCurrentThreat({ threat: null });
+            await gameModule.dispatchUpdateModal({
+                modal: {
+                    image: "rabbit.svg",
+                    title: "The Rabbit ate the carrot!",
+                    body:
+                        "You're in luck! The Rabbit didn't touch your strawberry beds, instead it enjoyed the carrot and ran away."
+                }
+            });
+        } else {
+            await gameModule.dispatchUpdateModal({
+                modal: {
+                    image: "carrot.svg",
+                    title: "Oh dear, that's not quite right!",
+                    body:
+                        "These Rabbits seem to prefer tasty fresh carrots, not seeds. Try feeding the rabbit a carrot and see what happens."
+                }
+            });
+        }
     }
 
     private async closeModal() {

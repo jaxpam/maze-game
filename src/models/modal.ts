@@ -1,5 +1,5 @@
 export default class Modal {
-    imageFile: string = "";
+    image: string = "";
     title: string = "";
     body: string = "";
 }

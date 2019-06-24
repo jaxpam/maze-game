@@ -14,4 +14,6 @@ export default class Room {
     public south: Passage | null = null;
     public west: Passage | null = null;
 
+    public id: number = 0;
+
 }

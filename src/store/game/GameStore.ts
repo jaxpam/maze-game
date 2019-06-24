@@ -14,15 +14,11 @@ const a = getStoreBuilder<IRootState>().module("game", initialGameState);
 
 // mutations
 function commitCurrentMaze(state: GameState, payload: { currentMaze: Maze }) {
-    if (state.currentMaze !== null) {
-        state.currentMaze = payload.currentMaze;
-    }
+    state.currentMaze = payload.currentMaze;
 }
 
 function commitCurrentRoom(state: GameState, payload: { currentRoom: Room }) {
-    if (state.currentRoom !== null) {
-        state.currentRoom = payload.currentRoom;
-    }
+    state.currentRoom = payload.currentRoom;
 }
 
 function commitRemoveTreasureFromCurrentRoom(state: GameState, payload: { treasure: Treasure }) {
@@ -50,7 +46,11 @@ function commitSetCurrentThreat(state: GameState, payload: { threat: Threat | nu
 }
 
 function commitUpdateModal(state: GameState, payload: { modal: Modal | null }) {
-    state.currentModal = payload.modal
+    state.currentModal = payload.modal;
+}
+
+function commitSetInitialMaze(state: GameState, payload: { initialMaze: Maze | null }) {
+    state.initialMaze = payload.initialMaze;
 }
 
 
@@ -101,6 +101,14 @@ async function eliminateCurrentThreat(
     }
 }
 
+async function setInitialMaze(
+    context: BareActionContext<GameState, IRootState>,
+    payload: { maze: Maze | null }
+) {
+    gameModule.commitSetInitialMaze({ initialMaze: payload.maze })
+
+}
+
 async function updateModal(
     context: BareActionContext<GameState, IRootState>,
     payload: { modal: Modal | null }
@@ -110,7 +118,7 @@ async function updateModal(
 
 async function setCurrentThreat(
     context: BareActionContext<GameState, IRootState>,
-    payload: { threat: Threat }
+    payload: { threat: Threat | null }
 ) {
     gameModule.commitSetCurrentThreat({ threat: payload.threat });
 }
@@ -144,6 +152,7 @@ const gameModule = {
     commitEliminateCurrentThreat: a.commit(commitEliminateCurrentThreat),
     commitSetCurrentThreat: a.commit(commitSetCurrentThreat),
     commitUpdateModal: a.commit(commitUpdateModal),
+    commitSetInitialMaze: a.commit(commitSetInitialMaze),
 
     // actions
     dispatchSetCurrentMaze: a.dispatch(setCurrentMaze),
@@ -151,7 +160,9 @@ const gameModule = {
     dispatchPickUpTreasure: a.dispatch(pickUpTreasure),
     dispatchEliminateThreat: a.dispatch(eliminateCurrentThreat),
     dispatchSetCurrentThreat: a.dispatch(setCurrentThreat),
-    dispatchUpdateModal: a.dispatch(updateModal)
+    dispatchUpdateModal: a.dispatch(updateModal),
+    dispatchSetInitialMaze: a.dispatch(setInitialMaze)
+
 
 };
 

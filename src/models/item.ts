@@ -1,5 +1,5 @@
 export default abstract class Item {
     public name: string = "";
-    public itemImage: string = "";
+    public image: string = "";
     public description: string = "";
 }
